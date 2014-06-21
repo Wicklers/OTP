@@ -20,18 +20,20 @@ Contribution Matters.
 
 EXAMPLE:::::
 ::::::::::::::::::::::::::
-<?php																							
-require_once 'core/init.php';																		
+
+
+	<?php																							
+	require_once 'core/init.php';																		
 																								
-if(!Input::exists()){																						
-?>																						
-    <form method="post" action="index.php">													
-    <input type="text" maxlength="10" placeholder="Enter Mobile Number" name="mobile"><br/>	
-    <input type="submit" value="Send OTP">													
-    </form>																						
-<?php																					
-}																							
-else if(Input::exists() && Input::get('mobile')!=''){
+	if(!Input::exists()){																						
+	?>																						
+    	<form method="post" action="index.php">													
+    	<input type="text" maxlength="10" placeholder="Enter Mobile Number" name="mobile"><br/>	
+    	<input type="submit" value="Send OTP">													
+    	</form>																						
+	<?php																					
+	}																							
+	else if(Input::exists() && Input::get('mobile')!=''){
 		$otp = new OTP(8,4); // defining length and strength of the OTP CODE!!
 		
 		//GET the OTP Code in $code;
@@ -49,23 +51,23 @@ else if(Input::exists() && Input::get('mobile')!=''){
 		else{																					
 				echo "OTP Sending Error ... login attempt = " . Session::loginAttempts('OTP');	
 		}																					
-}																							
-if(Session::exists('OTP Sending')){																
+	}																							
+	if(Session::exists('OTP Sending')){																
 		echo Session::get('OTP Sending') . "<br/>";												
 		Session::delete('OTP Sending');															
 		if(Session::loginAttempts('OTP')){														
 			?>																					
-        <form action="example.php" method="post">													
-        <input type="text" maxlength="8" placeholder="Enter OTP Here" name="OTP_response_code"> 
-        <input type="submit" Value="Verify">													
-        </form>																					
-        <?php																						
+        	<form action="example.php" method="post">													
+        	<input type="text" maxlength="8" placeholder="Enter OTP Here" name="OTP_response_code"> 
+        	<input type="submit" Value="Verify">													
+        	</form>																					
+        	<?php																						
 			}																					
 		else{																					
 				echo 'You have been blocked.. contact Administrator';							
 			}																					
 		}																						
-if(Input::exists() && Input::get('OTP_response_code')!=''){										
+	if(Input::exists() && Input::get('OTP_response_code')!=''){										
 		$otp=new OTP();																			
 		if($otp->verifyOTP(Input::get('OTP_response_code'))){									
 				Session::deleteloginAttempt('OTP');												
@@ -77,6 +79,6 @@ if(Input::exists() && Input::get('OTP_response_code')!=''){
 						Redirect::to('index.php');												
 					}																			
 					
-		}
-}
-?>
+			}
+	}
+	?>
